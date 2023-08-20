@@ -51,6 +51,8 @@
                         </a>
                     @endforeach
                 </ul>
+            @else
+                <p class="no-lots">No lots available</p>
             @endif
 
             <div class="button">
