@@ -22,7 +22,6 @@ class CategoryController extends Controller
         $category = Category::create([
             'name' => $request->input('name'),
         ]);
-
         $categories = Category::all();
         return response()->json(['name' => $category->name]);
     }
@@ -31,7 +30,6 @@ class CategoryController extends Controller
     {
         $category = Category::where('name', $name)->first();
         $lots = Lot::where('category_name', $name)->get();
-
         $categories = Category::all();
         return view('category.oneCategory', compact('category', 'categories', 'lots'));
     }
@@ -40,7 +38,6 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->delete();
-
         return response()->json(['id' => $id]);
     }
 }

@@ -6,6 +6,7 @@ function openModal(modalId) {
 function closeModal() {
     $('.modal-overlay').removeClass('modal-open');
     $('#add-category-modal, #add-lot-modal, #update-lot-modal').removeClass('modal-open');
+    $('.error').addClass('hidden')
 }
 
 $(document).on('click', '#add-category-button', function(e) {
@@ -55,7 +56,9 @@ $(document).on('click', '#create-category', function() {
             location.reload();
         },
         error: function(response) {
-            console.log(response, 'error');
+            let error = $('#add-category').find('.error')
+            error.removeClass('hidden')
+            error.text(response.responseJSON.message)
         }
     });
 });
@@ -110,7 +113,15 @@ $(document).on('click', '#create-lot', function(e) {
             location.reload();
         },
         error: function(response) {
-            console.log(response, 'error')
+            if(response.responseJSON.message === 'The price field must be a number.') {
+                let error = $('#change-lot-data').find('.error')
+                error.removeClass('hidden')
+                error.text(response.responseJSON.message)
+                return
+            }
+            let error = $('#add-lot').find('.error')
+            error.removeClass('hidden')
+            error.text('All fields must be filled')
         }
     });
 });
@@ -162,7 +173,15 @@ $(document).on('click', '#change-lot', function(e) {
             location.reload();
         },
         error: function(response) {
-            console.log(response, 'error');
+            if(response.responseJSON.message === 'The price field must be a number.') {
+                let error = $('#change-lot-data').find('.error')
+                error.removeClass('hidden')
+                error.text(response.responseJSON.message)
+                return
+            }
+            let error = $('#change-lot-data').find('.error')
+            error.removeClass('hidden')
+            error.text('All fields must be filled')
         }
     });
 });

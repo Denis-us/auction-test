@@ -6193,6 +6193,7 @@ function openModal(modalId) {
 function closeModal() {
   $('.modal-overlay').removeClass('modal-open');
   $('#add-category-modal, #add-lot-modal, #update-lot-modal').removeClass('modal-open');
+  $('.error').addClass('hidden');
 }
 $(document).on('click', '#add-category-button', function (e) {
   e.preventDefault();
@@ -6234,7 +6235,9 @@ $(document).on('click', '#create-category', function () {
       location.reload();
     },
     error: function error(response) {
-      console.log(response, 'error');
+      var error = $('#add-category').find('.error');
+      error.removeClass('hidden');
+      error.text(response.responseJSON.message);
     }
   });
 });
@@ -6282,7 +6285,15 @@ $(document).on('click', '#create-lot', function (e) {
       location.reload();
     },
     error: function error(response) {
-      console.log(response, 'error');
+      if (response.responseJSON.message === 'The price field must be a number.') {
+        var _error = $('#change-lot-data').find('.error');
+        _error.removeClass('hidden');
+        _error.text(response.responseJSON.message);
+        return;
+      }
+      var error = $('#add-lot').find('.error');
+      error.removeClass('hidden');
+      error.text('All fields must be filled');
     }
   });
 });
@@ -6327,7 +6338,15 @@ $(document).on('click', '#change-lot', function (e) {
       location.reload();
     },
     error: function error(response) {
-      console.log(response, 'error');
+      if (response.responseJSON.message === 'The price field must be a number.') {
+        var _error2 = $('#change-lot-data').find('.error');
+        _error2.removeClass('hidden');
+        _error2.text(response.responseJSON.message);
+        return;
+      }
+      var error = $('#change-lot-data').find('.error');
+      error.removeClass('hidden');
+      error.text('All fields must be filled');
     }
   });
 });

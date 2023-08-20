@@ -198,3 +198,17 @@ ul {
 .modal-buttons {
     margin-top: 15px;
 }
+
+.input {
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 20px;
+}
+
+.error {
+    color: red;
+}
+
+.hidden {
+    display: none;
+}

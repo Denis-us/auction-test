@@ -15,6 +15,7 @@
                 <label for="lot-name">Description</label>
                 <input class="input" type="text" name="description" placeholder="description" id="lot-description">
             </div>
+            <p class="error hidden"></p>
         </div>
         <div class="modal-buttons">
             <button type="button" class="btn close">Close</button>
